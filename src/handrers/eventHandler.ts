@@ -8,11 +8,14 @@ import rabbitMQHandler from "typescript-rabbitmq-handler/dist";
 
 export const handleEvent = async (event: IEvent, rabbit: rabbitMQHandler): Promise<void> => {
     switch (event.Template) {
+
+        case "reset_password":
         case "user_delete":
         case "user_change_role":
         case "user_block":
             await rabbitSendQueues(rabbit, [RABBITMQ_QUEUE_MAIL, RABBITMQ_QUEUE_EMITTER, RABBITMQ_QUEUE_AUTH], event);
             break;
+        case "user_register":
         case"user_unblock":
             await rabbitSendQueues(rabbit, [RABBITMQ_QUEUE_MAIL], event);
             break;
