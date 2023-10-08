@@ -35,6 +35,7 @@ export const handleEvent = async (event: IEvent, rabbit: rabbitMQHandler): Promi
         case"news_delete":
             await rabbitSendQueues(rabbit, [RABBITMQ_QUEUE_MAIL, RABBITMQ_QUEUE_EMITTER], event);
             break;
+
     }
 };
 
