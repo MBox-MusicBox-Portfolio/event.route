@@ -15,11 +15,14 @@ export const handleEvent = async (event: IEvent, rabbit: rabbitMQHandler): Promi
         case "user_block":
             await rabbitSendQueues(rabbit, [RABBITMQ_QUEUE_MAIL, RABBITMQ_QUEUE_EMITTER, RABBITMQ_QUEUE_AUTH], event);
             break;
-        case "user_register":
-        case"user_unblock":
+        case "follow_band":
+        case"follow_playlist":
             await rabbitSendQueues(rabbit, [RABBITMQ_QUEUE_MAIL], event);
             break;
-
+        case "user_register":
+        case"user_unblock":
+            await rabbitSendQueues(rabbit, [RABBITMQ_QUEUE_EMITTER], event);
+            break;
         case"band_block":
         case"band_delete":
         case"band_unblock":
